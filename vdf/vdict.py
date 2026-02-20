@@ -69,6 +69,9 @@ class VDFDict(dict):
                 raise KeyError("%s doesn't exist" % repr(key))
         else:
             raise TypeError("Expected either a str or tuple for key")
+
+        if isinstance(value, dict) and not isinstance(value, VDFDict):
+            value = VDFDict(value)
         super().__setitem__(key, value)
         self.__kcount[key[1]] += 1
 
